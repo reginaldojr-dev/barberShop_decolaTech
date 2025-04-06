@@ -1,0 +1,61 @@
+<div class="clientes-form-container">
+  <h2 class="form-title">Cadastro de Cliente - Barbearia</h2>
+
+  <form [formGroup]="clientesForm" (ngSubmit)="cadastrarClientes()" class="clientes-form">
+    <div class="form-grid">
+
+      <!-- Nome -->
+      <div class="form-group">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" formControlName="nome" required>
+        <div class="error-message" *ngIf="clientesForm.get('nome')?.invalid && clientesForm.get('nome')?.touched">
+          Nome é obrigatório
+        </div>
+      </div>
+
+      <!-- Telefone -->
+      <div class="form-group">
+        <label for="telefone">Telefone:</label>
+        <input type="tel" id="telefone" formControlName="telefone" placeholder="(99) 99999-9999" required>
+        <div class="error-message" *ngIf="clientesForm.get('telefone')?.invalid && clientesForm.get('telefone')?.touched">
+          Telefone é obrigatório
+        </div>
+      </div>
+
+      <!-- Email -->
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" formControlName="email" required>
+        <div class="error-message" *ngIf="clientesForm.get('email')?.invalid && clientesForm.get('email')?.touched">
+          Email inválido
+        </div>
+      </div>
+
+      <!-- Idade -->
+      <div class="form-group">
+        <label for="idade">Idade:</label>
+        <input type="number" id="idade" formControlName="idade" min="0" required>
+        <div class="error-message" *ngIf="clientesForm.get('idade')?.invalid && clientesForm.get('idade')?.touched">
+          Idade inválida
+        </div>
+      </div>
+
+      <!-- Serviço Preferido -->
+      <div class="form-group">
+        <label for="preferencia">Serviço: </label>
+        <select id="preferencia" formControlName="preferencia">
+          <option value="">Selecione</option>
+          <option value="corte">Corte de Cabelo</option>
+          <option value="barba">Barba</option>
+          <option value="sobrancelha">Sobrancelha</option>
+          <option value="combo">Combo Corte + Barba</option>
+        </select>
+      </div>
+
+    </div>
+
+    <button type="submit" class="submit-btn" [disabled]="clientesForm.invalid">
+      Cadastrar Cliente
+    </button>
+  </form>
+</div>

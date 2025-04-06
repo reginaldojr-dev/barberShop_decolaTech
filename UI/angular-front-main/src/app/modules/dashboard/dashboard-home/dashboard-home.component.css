@@ -1,0 +1,124 @@
+body {
+  margin: 0;
+  background-color: #0d0d0d;
+  font-family: 'Segoe UI', sans-serif;
+  color: #fff;
+}
+
+/* Cabeçalho */
+.dashboard-header {
+  text-align: center;
+  padding: 2rem 1rem;
+  background-color: #1a1a1a;
+  border-bottom: 2px solid #8b0000;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.logo {
+  filter: drop-shadow(0 0 5px #8b0000);
+}
+
+.barbearia-title {
+  font-size: 2rem;
+  color: #ff1a1a;
+  margin: 0;
+}
+
+.welcome-message {
+  margin-top: 0.5rem;
+  color: #ccc;
+  font-size: 1.1rem;
+}
+
+/* Grid de Cards */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  padding: 3rem 5%;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Card */
+.dashboard-card {
+  background-color: #1a1a1a;
+  border: 1px solid #333;
+  border-left: 5px solid #8b0000;
+  color: #fff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.1);
+}
+
+.dashboard-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
+  border-left: 5px solid #ff1a1a;
+}
+
+mat-card-title {
+  color: #ff4d4d;
+  font-size: 1.2rem;
+}
+
+mat-card-content p {
+  color: #ccc;
+}
+
+mat-card-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+button[mat-raised-button] {
+  background-color: #8b0000;
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+button[mat-raised-button]:hover {
+  background-color: #ff1a1a;
+}
+
+/* Avatares dos cards */
+.card-avatar {
+  background-color: #ff1a1a;
+  border-radius: 50%;
+}
+
+/* Estatísticas */
+.stats-container {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 1rem;
+  gap: 1rem;
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-value {
+  font-size: 2rem;
+  color: #ff4d4d;
+  font-weight: bold;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: #aaa;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+    padding: 2rem;
+  }
+}

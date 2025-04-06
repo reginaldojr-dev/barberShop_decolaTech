@@ -1,0 +1,69 @@
+<div class="agendamento-container">
+  <div class="agendamento-card">
+    <h2 class="agendamento-title">Agendamento - Barbearia Estilo Fino</h2>
+    
+    <form [formGroup]="scheduleForm" (ngSubmit)="agendar()" class="agendamento-form">
+      <mat-form-field appearance="outline">
+        <mat-label>Nome do Cliente</mat-label>
+        <input matInput type="text" formControlName="nomeCliente" required>
+        <mat-icon matPrefix>person</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Telefone</mat-label>
+        <input matInput type="tel" formControlName="telefone" required>
+        <mat-icon matPrefix>phone</mat-icon>
+      </mat-form-field>
+
+      <div class="row">
+        <mat-form-field appearance="outline" class="half-width">
+          <mat-label>Data</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="data" required>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <mat-icon matPrefix>calendar_today</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="half-width">
+          <mat-label>Hora</mat-label>
+          <input matInput type="time" formControlName="hora" required>
+          <mat-icon matPrefix>schedule</mat-icon>
+        </mat-form-field>
+      </div>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Barbeiro</mat-label>
+        <mat-select formControlName="barbeiro" required>
+          <mat-option value="joao">João - Especialista em Cortes Clássicos</mat-option>
+          <mat-option value="marcos">Marcos - Mestre em Barbas</mat-option>
+          <mat-option value="carlos">Carlos - Estilista Moderno</mat-option>
+        </mat-select>
+        <mat-icon matPrefix>content_cut</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Serviço</mat-label>
+        <mat-select formControlName="servico" required>
+          <mat-option value="corte">Corte de Cabelo - R$ 50,00</mat-option>
+          <mat-option value="barba">Barba Completa - R$ 40,00</mat-option>
+          <mat-option value="completo">Corte + Barba - R$ 80,00</mat-option>
+          <mat-option value="pezinho">Pezinho - R$ 20,00</mat-option>
+          <mat-option value="sobrancelha">Sobrancelha - R$ 15,00</mat-option>
+        </mat-select>
+        <mat-icon matPrefix>style</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Observações</mat-label>
+        <textarea matInput formControlName="observacoes" rows="3"></textarea>
+      </mat-form-field>
+
+      <div class="button-container">
+        <button mat-raised-button color="primary" type="submit" [disabled]="scheduleForm.invalid">
+          <mat-icon>event_available</mat-icon>
+          Confirmar Agendamento
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

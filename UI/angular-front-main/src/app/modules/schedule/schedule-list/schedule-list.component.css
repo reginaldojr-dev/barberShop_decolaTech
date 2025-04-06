@@ -1,0 +1,105 @@
+.agendamentos-container {
+  padding: 2rem;
+  background-color: #0a0a0a;
+  min-height: 100vh;
+  color: #fff;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.titulo {
+  text-align: center;
+  font-size: 2rem;
+  color: #ff1a1a;
+  margin-bottom: 2rem;
+  animation: fadeInDown 0.8s ease;
+}
+
+/* Wrapper da Tabela */
+.table-wrapper {
+  overflow-x: auto;
+  border-radius: 10px;
+  background-color: #111;
+  padding: 1rem;
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.1);
+  animation: fadeIn 1s ease;
+}
+
+/* Estilo da Tabela */
+table.mat-table {
+  width: 100%;
+  border-collapse: collapse;
+  color: #fff;
+  background-color: transparent;
+}
+
+/* Cabeçalhos */
+.header-cell {
+  color: #ff1a1a;
+  font-weight: bold;
+  font-size: 1rem;
+  padding: 1rem;
+  border-bottom: 2px solid #ff1a1a;
+  background-color: #1a1a1a;
+}
+
+/* Células */
+.cell {
+  padding: 0.8rem;
+  font-size: 0.95rem;
+  border-bottom: 1px solid #333;
+  transition: background-color 0.3s ease;
+}
+
+.row:hover .cell {
+  background-color: rgba(255, 0, 0, 0.05);
+}
+
+/* Linhas */
+.header-row {
+  transition: background-color 0.3s ease;
+}
+
+.row {
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.row:hover {
+  transform: scale(1.01);
+  box-shadow: 0 0 8px rgba(255, 0, 0, 0.2);
+}
+
+/* Animações */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .titulo {
+    font-size: 1.5rem;
+  }
+
+  .cell, .header-cell {
+    font-size: 0.85rem;
+    padding: 0.6rem;
+  }
+}
