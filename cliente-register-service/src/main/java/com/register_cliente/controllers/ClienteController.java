@@ -12,8 +12,12 @@ import java.util.Optional;
 @RequestMapping("/clientes")
 public class ClienteController {
 
-    @Autowired
+
     private ClienteService clienteService;
+
+    public ClienteController(ClienteService clienteService) {
+        this.clienteService = clienteService;
+    }
 
     @PostMapping
     public Cliente cadastrarCliente(@RequestBody Cliente cliente) {

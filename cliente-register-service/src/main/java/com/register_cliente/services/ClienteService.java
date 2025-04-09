@@ -3,10 +3,7 @@ package com.register_cliente.services;
 import com.register_cliente.dto.ClienteDTO;
 import com.register_cliente.models.Cliente;
 import com.register_cliente.repositories.ClienteRepository;
-import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,14 +11,11 @@ import java.util.Optional;
 @Service
 public class ClienteService {
 
-    @Autowired
     private ClienteRepository clienteRepository;
 
-    @Autowired
-    private WebClient.Builder webClientBuilder;
-
-    @Autowired
-    private RabbitMQService rabbitMQService;
+    public ClienteService(ClienteRepository clienteRepository) {
+        this.clienteRepository = clienteRepository;
+    }
 
     public List<Cliente> filtrarNome(String nome) {
         return clienteRepository.findByNome(nome);
@@ -46,7 +40,6 @@ public class ClienteService {
     public Cliente cadastrarCliente(Cliente cliente) {
         Cliente clienteSalvo = clienteRepository.save(cliente);
         ClienteDTO clienteDTO = toDTO(clienteSalvo);
-        rabbitMQService.publicarEventoClienteCriado(clienteDTO);
 
         return clienteSalvo;
     }

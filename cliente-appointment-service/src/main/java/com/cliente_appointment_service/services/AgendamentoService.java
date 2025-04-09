@@ -5,7 +5,6 @@ import com.cliente_appointment_service.dto.AgendamentoDTO;
 import com.cliente_appointment_service.dto.ClienteDTO;
 import com.cliente_appointment_service.models.Agendamento;
 import com.cliente_appointment_service.repositories.AgendamentoRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -15,21 +14,17 @@ import java.util.Optional;
 @Service
 public class AgendamentoService {
 
-    @Autowired
-    private AgendamentoRepository agendamentoRepository;
+    private final AgendamentoRepository agendamentoRepository;
+    private final ClienteRegisterClient clienteRegisterClient;
 
-    @Autowired
-    private RabbitMQService rabbitMQService;
-
-    @Autowired
-    private ClienteRegisterClient clienteRegisterClient;
-
+    public AgendamentoService(AgendamentoRepository agendamentoRepository, ClienteRegisterClient clienteRegisterClient) {
+        this.agendamentoRepository = agendamentoRepository;
+        this.clienteRegisterClient = clienteRegisterClient;
+    }
 
     public AgendamentoDTO criarAgendamentoManual(Long id, String servico, LocalDateTime data) {
-
         ClienteDTO clienteDTO = clienteRegisterClient.getClienteDTO(id);
         if (clienteDTO == null) {
-            rabbitMQService.publicarEventoPetInfoRequest(id);
             throw new RuntimeException("Dados do cliente não encontrados.");
         }
 
@@ -39,12 +34,8 @@ public class AgendamentoService {
         agendamento.setData(data);
         agendamento.setEmail(clienteDTO.getEmail());
 
-
         Agendamento savedAgendamento = agendamentoRepository.save(agendamento);
-        AgendamentoDTO agendamentoDTO = toDTO(savedAgendamento);
-        rabbitMQService.publicarEventoAppointmentCriado(agendamentoDTO);
-
-        return agendamentoDTO;
+        return toDTO(savedAgendamento);
     }
 
     public List<Agendamento> listarAgendamentos() {
@@ -61,15 +52,9 @@ public class AgendamentoService {
                     agendamento.setServico(agendamentoAtualizado.getServico());
                     agendamento.setData(agendamentoAtualizado.getData());
                     Agendamento savedAgendamento = agendamentoRepository.save(agendamento);
-                    AgendamentoDTO agendamentoDTO = toDTO(savedAgendamento);
-                    rabbitMQService.publicarEventoAppointmentCriado(agendamentoDTO);
-
-                    return agendamentoDTO;
+                    return toDTO(savedAgendamento);
                 })
                 .orElseThrow(() -> new RuntimeException("Agendamento não encontrado com o ID: " + id));
-    }
-
-    public void processarPetInfoResponse(ClienteDTO clienteDTO) {
     }
 
     public void excluirAgendamento(Long id) {
@@ -77,9 +62,14 @@ public class AgendamentoService {
     }
 
     private AgendamentoDTO toDTO(Agendamento agendamento) {
-        return null;
+        AgendamentoDTO dto = new AgendamentoDTO();
+        dto.setNome(agendamento.getNome());
+        dto.setHora(agendamento.getData().toLocalTime().atDate(agendamento.getData().toLocalDate()));
+        dto.setServico(agendamento.getServico());
+        dto.setData(agendamento.getData());
+        dto.setEmail(agendamento.getEmail());
+        return dto;
     }
 
-    public void processarClienteInfoResponse(ClienteDTO clienteDTO) {
-    }
+
 }

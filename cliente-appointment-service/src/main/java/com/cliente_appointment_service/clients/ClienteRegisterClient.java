@@ -14,7 +14,7 @@ import org.springframework.web.reactive.function.client.WebClient;
         public ClienteDTO getClienteDTO(Long clienteId) {
             return webClientBuilder.build()
                     .get()
-                    .uri("http://localhost:8080/pets/{id}", clienteId)
+                    .uri("http://localhost:8080/cliente/{id}", clienteId)
                     .retrieve()
                     .bodyToMono(ClienteDTO.class)
                     .block();

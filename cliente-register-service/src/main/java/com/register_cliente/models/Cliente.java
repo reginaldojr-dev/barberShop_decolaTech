@@ -3,8 +3,9 @@ package com.register_cliente.models;
 import jakarta.persistence.*;
 import lombok.Data;
 
-@Table(name = "cadastro_db")
+
 @Entity
+@Table(name = "cadastro_db")
 public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

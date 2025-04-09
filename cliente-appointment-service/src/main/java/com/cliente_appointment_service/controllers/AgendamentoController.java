@@ -14,9 +14,11 @@ import java.util.Optional;
 @RequestMapping("/agendamentos")
 public class AgendamentoController {
 
-    @Autowired
     private AgendamentoService agendamentoService;
 
+    public AgendamentoController(AgendamentoService agendamentoService) {
+        this.agendamentoService = agendamentoService;
+    }
 
     @PostMapping("/manual")
     public AgendamentoDTO criarAgendamentoManual(@RequestParam Long clienteId, @RequestParam String servico, @RequestParam LocalDateTime data) {
