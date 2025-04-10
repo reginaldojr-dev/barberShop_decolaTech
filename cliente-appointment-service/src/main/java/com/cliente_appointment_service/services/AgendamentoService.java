@@ -8,6 +8,7 @@ import com.cliente_appointment_service.repositories.AgendamentoRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,7 +26,7 @@ public class AgendamentoService {
     public AgendamentoDTO criarAgendamentoManual(Long id, String servico, LocalDateTime data) {
         ClienteDTO clienteDTO = clienteRegisterClient.getClienteDTO(id);
         if (clienteDTO == null) {
-            throw new RuntimeException("Dados do cliente não encontrados.");
+            throw new IllegalArgumentException("Cliente com ID " + id + " não encontrado.");
         }
 
         Agendamento agendamento = new Agendamento();
@@ -33,6 +34,8 @@ public class AgendamentoService {
         agendamento.setServico(servico);
         agendamento.setData(data);
         agendamento.setEmail(clienteDTO.getEmail());
+        agendamento.setNome(clienteDTO.getNome());
+        agendamento.setNumeroTelefone(clienteDTO.getNumeroTelefone());
 
         Agendamento savedAgendamento = agendamentoRepository.save(agendamento);
         return toDTO(savedAgendamento);
@@ -54,7 +57,7 @@ public class AgendamentoService {
                     Agendamento savedAgendamento = agendamentoRepository.save(agendamento);
                     return toDTO(savedAgendamento);
                 })
-                .orElseThrow(() -> new RuntimeException("Agendamento não encontrado com o ID: " + id));
+                .orElseThrow(() -> new IllegalArgumentException("Agendamento não encontrado com o ID: " + id));
     }
 
     public void excluirAgendamento(Long id) {
@@ -64,12 +67,14 @@ public class AgendamentoService {
     private AgendamentoDTO toDTO(Agendamento agendamento) {
         AgendamentoDTO dto = new AgendamentoDTO();
         dto.setNome(agendamento.getNome());
-        dto.setHora(agendamento.getData().toLocalTime().atDate(agendamento.getData().toLocalDate()));
+        dto.setHora(agendamento.getData().toLocalTime()); // Corrigido: apenas a hora
         dto.setServico(agendamento.getServico());
         dto.setData(agendamento.getData());
         dto.setEmail(agendamento.getEmail());
         return dto;
     }
 
-
+    public AgendamentoDTO criarAgendamento(AgendamentoDTO dto) {
+        return dto;
+    }
 }

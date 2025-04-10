@@ -1,24 +1,28 @@
 package com.cliente_appointment_service.clients;
 
 import com.cliente_appointment_service.dto.ClienteDTO;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
 @Service
- public class ClienteRegisterClient {
+public class ClienteRegisterClient {
 
-        @Autowired
-        private WebClient.Builder webClientBuilder;
+    private final WebClient webClient;
 
-        public ClienteDTO getClienteDTO(Long clienteId) {
-            return webClientBuilder.build()
-                    .get()
-                    .uri("http://localhost:8080/cliente/{id}", clienteId)
-                    .retrieve()
-                    .bodyToMono(ClienteDTO.class)
-                    .block();
-        }
+    @Value("${cliente-register-service.url}")
+    private String clienteServiceUrl;
+
+    public ClienteRegisterClient(WebClient.Builder webClientBuilder) {
+        this.webClient = webClientBuilder.build();
+    }
+
+    public ClienteDTO getClienteDTO(Long clienteId) {
+        return webClient
+                .get()
+                .uri(clienteServiceUrl + "/cliente/{id}", clienteId)
+                .retrieve()
+                .bodyToMono(ClienteDTO.class)
+                .block();
+    }
 }
-
-

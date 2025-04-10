@@ -3,46 +3,48 @@ package com.cliente_appointment_service.controllers;
 import com.cliente_appointment_service.dto.AgendamentoDTO;
 import com.cliente_appointment_service.models.Agendamento;
 import com.cliente_appointment_service.services.AgendamentoService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/agendamentos")
 public class AgendamentoController {
 
-    private AgendamentoService agendamentoService;
+    private final AgendamentoService agendamentoService;
 
     public AgendamentoController(AgendamentoService agendamentoService) {
         this.agendamentoService = agendamentoService;
     }
 
-    @PostMapping("/manual")
-    public AgendamentoDTO criarAgendamentoManual(@RequestParam Long clienteId, @RequestParam String servico, @RequestParam LocalDateTime data) {
-        return agendamentoService.criarAgendamentoManual(clienteId, servico, data);
+    @PostMapping
+    public ResponseEntity<AgendamentoDTO> criarAgendamento(@RequestBody AgendamentoDTO dto) {
+        AgendamentoDTO novoAgendamento = agendamentoService.criarAgendamento(dto);
+        return ResponseEntity.ok(novoAgendamento);
     }
 
     @GetMapping
-    public List<Agendamento> listarAgendamentos() {
-        return agendamentoService.listarAgendamentos();
+    public ResponseEntity<List<Agendamento>> listarAgendamentos() {
+        return ResponseEntity.ok(agendamentoService.listarAgendamentos());
     }
 
     @GetMapping("/{id}")
-    public Optional<Agendamento> buscarAgendamentoPorId(@PathVariable Long id) {
-        return agendamentoService.buscarAgendamentoPorId(id);
+    public ResponseEntity<Agendamento> buscarAgendamentoPorId(@PathVariable Long id) {
+        return agendamentoService.buscarAgendamentoPorId(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @PutMapping("/{id}")
-    public AgendamentoDTO atualizarAgendamento(@PathVariable Long id, @RequestBody Agendamento agendamentoAtualizado) {
-        return agendamentoService.atualizarAgendamento(id, agendamentoAtualizado);
+    public ResponseEntity<AgendamentoDTO> atualizarAgendamento(@PathVariable Long id, @RequestBody Agendamento agendamentoAtualizado) {
+        return ResponseEntity.ok(agendamentoService.atualizarAgendamento(id, agendamentoAtualizado));
     }
 
     @DeleteMapping("/{id}")
-    public void excluirAgendamento(@PathVariable Long id) {
+    public ResponseEntity<Void> excluirAgendamento(@PathVariable Long id) {
         agendamentoService.excluirAgendamento(id);
+        return ResponseEntity.noContent().build();
     }
 }
 

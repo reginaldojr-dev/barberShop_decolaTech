@@ -11,7 +11,7 @@ import java.util.Optional;
 @Service
 public class ClienteService {
 
-    private ClienteRepository clienteRepository;
+    private final ClienteRepository clienteRepository;
 
     public ClienteService(ClienteRepository clienteRepository) {
         this.clienteRepository = clienteRepository;
@@ -34,13 +34,16 @@ public class ClienteService {
     }
 
     public void excluirCliente(Long id) {
+        if (!clienteRepository.existsById(id)) {
+            throw new RuntimeException("Cliente com o ID: " + id + " não encontrado.");
+        }
         clienteRepository.deleteById(id);
     }
 
     public Cliente cadastrarCliente(Cliente cliente) {
         Cliente clienteSalvo = clienteRepository.save(cliente);
-        ClienteDTO clienteDTO = toDTO(clienteSalvo);
-
+        // Conversão para DTO feita, mas não utilizada aqui. Pode ser útil se for retorná-lo em outra camada.
+        toDTO(clienteSalvo);
         return clienteSalvo;
     }
 
@@ -52,12 +55,10 @@ public class ClienteService {
                     cliente.setIdade(clienteAtualizado.getIdade());
                     cliente.setNumeroTelefone(clienteAtualizado.getNumeroTelefone());
                     cliente.setServico(clienteAtualizado.getServico());
-
                     return clienteRepository.save(cliente);
                 })
-                .orElseThrow(() -> new RuntimeException("Cliente com o ID: " + id + " não encontrado"));
+                .orElseThrow(() -> new RuntimeException("Cliente com o ID: " + id + " não encontrado."));
     }
-
 
     public ClienteDTO toDTO(Cliente cliente) {
         ClienteDTO clienteDTO = new ClienteDTO();
@@ -65,6 +66,7 @@ public class ClienteService {
         clienteDTO.setEmail(cliente.getEmail());
         clienteDTO.setIdade(cliente.getIdade());
         clienteDTO.setNumeroTelefone(cliente.getNumeroTelefone());
+        clienteDTO.setServico(cliente.getServico());
         return clienteDTO;
     }
 }
