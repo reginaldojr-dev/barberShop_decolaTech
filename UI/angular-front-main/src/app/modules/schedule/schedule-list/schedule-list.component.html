@@ -1,0 +1,47 @@
+<div class="agendamentos-container">
+  <h2 class="titulo">Lista de Agendamentos</h2>
+
+  <div class="table-wrapper">
+    <table mat-table [dataSource]="agendamentos" class="mat-elevation-z8 compact-table">
+
+      <ng-container matColumnDef="data">
+        <th mat-header-cell *matHeaderCellDef class="header-cell">Data</th>
+        <td mat-cell *matCellDef="let agendamento" class="cell">
+          {{ agendamento.data | date:'dd/MM/yyyy' }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="hora">
+        <th mat-header-cell *matHeaderCellDef class="header-cell">Hora</th>
+        <td mat-cell *matCellDef="let agendamento" class="cell">
+          {{ agendamento.hora }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="cliente">
+        <th mat-header-cell *matHeaderCellDef class="header-cell">Cliente</th>
+        <td mat-cell *matCellDef="let agendamento" class="cell">
+          {{ agendamento.cliente }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="barbeiro">
+        <th mat-header-cell *matHeaderCellDef class="header-cell">Barbeiro</th>
+        <td mat-cell *matCellDef="let agendamento" class="cell">
+          {{ agendamento.barbeiro }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="servico">
+        <th mat-header-cell *matHeaderCellDef class="header-cell">Serviço</th>
+        <td mat-cell *matCellDef="let agendamento" class="cell">
+          {{ agendamento.servico }}
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns" class="header-row"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="row"></tr>
+
+    </table>
+  </div>
+</div>

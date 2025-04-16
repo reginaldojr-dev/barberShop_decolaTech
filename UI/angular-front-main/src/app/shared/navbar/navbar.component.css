@@ -1,0 +1,51 @@
+/* Toolbar */
+.home-button-toolbar {
+  background-color: #0d0d0d;
+  border-bottom: 2px solid #8b0000;
+  padding: 0.5rem 2rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(255, 0, 0, 0.2);
+  z-index: 10;
+}
+
+/* Navegação */
+.nav-links {
+  display: flex;
+  align-items: center;
+}
+
+/* Link Home */
+.home-button {
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: color 0.3s ease, transform 0.3s ease;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.4rem 1rem;
+  border-radius: 5px;
+}
+
+.home-button:hover {
+  color: #ff1a1a;
+  transform: scale(1.05);
+  background-color: rgba(255, 0, 0, 0.05);
+}
+
+.home-button.active {
+  color: #ff1a1a;
+  border-bottom: 2px solid #ff1a1a;
+}
+
+.button-text {
+  font-size: 1rem;
+}
+
+/* Ícone */
+mat-icon {
+  font-size: 20px;
+  vertical-align: middle;
+}

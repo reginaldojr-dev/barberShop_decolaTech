@@ -1,0 +1,27 @@
+<div class="container">
+  <h2>Buscar Cliente</h2>
+
+  <form [formGroup]="searchForm" (ngSubmit)="buscarClientes()">
+    <mat-form-field appearance="outline">
+      <mat-label>ID do Cliente</mat-label>
+      <input matInput type="text" formControlName="clienteId" required>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="searchForm.invalid">
+      Buscar
+    </button>
+  </form>
+
+  <div *ngIf="clienteDetails" class="cliente-info">
+    <h3>Detalhes do Cliente</h3>
+    <p><strong>Nome:</strong> {{ clienteDetails.nome }}</p>
+    <p><strong>Telefone:</strong> {{ clienteDetails.telefone }}</p>
+    <p><strong>Email:</strong> {{ clienteDetails.email }}</p>
+    <p><strong>Idade:</strong> {{ clienteDetails.idade }} anos</p>
+    <p><strong>Serviço:</strong> {{ clienteDetails.servico }}</p>
+  </div>
+
+  <div *ngIf="clienteNotFound" class="not-found">
+    <p>❌ Cliente não encontrado.</p>
+  </div>
+</div>

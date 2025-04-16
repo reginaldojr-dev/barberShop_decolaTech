@@ -1,0 +1,122 @@
+/* Cores principais */
+:root {
+  --primary-color: #d4af37; /* Dourado */
+  --dark-bg: #1a1a1a;
+  --darker-bg: #121212;
+  --card-bg: #242424;
+  --text-color: #e0e0e0;
+  --text-secondary: #b0b0b0;
+}
+
+/* Container principal */
+.agendamento-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: var(--dark-bg);
+  padding: 2rem;
+}
+
+/* Card do formulário */
+.agendamento-card {
+  background-color: var(--card-bg);
+  border-radius: 12px;
+  padding: 2.5rem;
+  width: 100%;
+  max-width: 700px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+/* Título */
+.agendamento-title {
+  color: var(--primary-color);
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 1.8rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+
+/* Formulário */
+.agendamento-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Campos do formulário */
+mat-form-field {
+  width: 100%;
+}
+
+.mat-form-field-outline {
+  color: rgba(255, 255, 255, 0.1);
+}
+
+.mat-form-field-appearance-outline .mat-form-field-outline-thick {
+  color: var(--primary-color);
+}
+
+.mat-input-element {
+  color: var(--text-color);
+}
+
+.mat-form-field-label {
+  color: var(--text-secondary);
+}
+
+.mat-select-value {
+  color: var(--text-color) !important;
+}
+
+/* Linha com campos lado a lado */
+.row {
+  display: flex;
+  gap: 1rem;
+}
+
+.half-width {
+  flex: 1;
+}
+
+/* Botão */
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+button[mat-raised-button] {
+  padding: 0.8rem 2rem;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+}
+
+button[mat-raised-button]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+}
+
+/* Ícones */
+mat-icon {
+  color: var(--primary-color);
+  margin-right: 8px;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .row {
+    flex-direction: column;
+  }
+  
+  .half-width {
+    width: 100%;
+  }
+  
+  .agendamento-card {
+    padding: 1.5rem;
+  }
+}
