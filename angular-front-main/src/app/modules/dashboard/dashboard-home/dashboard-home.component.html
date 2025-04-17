@@ -1,0 +1,88 @@
+<div class="barbearia-dashboard">
+  <!-- Cabeçalho com logo/título -->
+  <header class="dashboard-header">
+    <div class="logo-container">
+      <h1 class="barbearia-title">Barbearia Estilo Fino</h1>
+    </div>
+    <p class="welcome-message">Bem-vindo ao seu painel de controle</p>
+  </header>
+
+  <!-- Seção de cards de funcionalidades -->
+  <div class="dashboard-grid">
+    <!-- Card Cadastrar Clientes -->
+    <mat-card class="dashboard-card" routerLink="/cadastrar-cliente" routerLinkActive="active">
+      <mat-card-header>
+        <div mat-card-avatar class="card-avatar clientes"></div>
+        <mat-card-title>Cadastrar Cliente</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>Adicione novos clientes ao seu sistema</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary">Acessar</button>
+      </mat-card-actions>
+    </mat-card>
+
+    <!-- Card Agendar Serviço -->
+    <mat-card class="dashboard-card" routerLink="/agendar-servico" routerLinkActive="active">
+      <mat-card-header>
+        <div mat-card-avatar class="card-avatar agenda"></div>
+        <mat-card-title>Agendar Serviço</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>Marque cortes, barbas e outros serviços</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="accent">Acessar</button>
+      </mat-card-actions>
+    </mat-card>
+
+    <!-- Card Listar Clientes -->
+    <mat-card class="dashboard-card" routerLink="/listar-cliente" routerLinkActive="active">
+      <mat-card-header>
+        <div mat-card-avatar class="card-avatar lista"></div>
+        <mat-card-title>Listar Clientes</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>Visualize e gerencie sua base de clientes</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="warn">Acessar</button>
+      </mat-card-actions>
+    </mat-card>
+
+    <!-- Card Listar Agendamentos -->
+    <mat-card class="dashboard-card" routerLink="/listar-agendamentos" routerLinkActive="active">
+      <mat-card-header>
+        <div mat-card-avatar class="card-avatar calendario"></div>
+        <mat-card-title>Agendamentos</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>Veja todos os agendamentos marcados</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary">Acessar</button>
+      </mat-card-actions>
+    </mat-card>
+
+    <!-- Card Estatísticas (opcional) -->
+    <mat-card class="dashboard-card stats-card">
+      <mat-card-header>
+        <div mat-card-avatar class="card-avatar stats"></div>
+        <mat-card-title>Estatísticas</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="stats-container">
+          <div class="stat-item">
+            <span class="stat-value">24</span>
+            <span class="stat-label">Agendamentos hoje</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value">5</span>
+            <span class="stat-label">Novos clientes</span>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
